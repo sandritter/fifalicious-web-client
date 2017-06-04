@@ -1,0 +1,145 @@
+.row-bordered:after {
+    content: "";
+    height:10px;
+    display: block;
+    border-bottom: 1px solid #ccc;
+}
+
+.top-bottom-buffer {
+    padding-bottom: 10px;
+}
+
+.top-bottom-buffer:first-child {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.vertical-align-middle-with-height-50 {
+    display: table-cell;
+    vertical-align: middle;
+    height: 50px;
+}
+
+.body-background-color {
+    background: #326295;
+}
+
+.headline-color {
+    color: whitesmoke;
+}
+
+.text {
+    color: whitesmoke !important;
+}
+
+.list-background-color {
+    background: #f5f5f5;
+}
+
+.item {
+    position: relative;
+    float: left;
+}
+
+.item .circle-text {
+    text-align:center;
+    color: #0f0f0f;
+    position: absolute;
+    line-height: 50px;
+    width: 100%;
+}
+
+svg {
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+.circle_animation {
+    stroke-dasharray: 132; /* this value is the pixel circumference of the circle */
+    stroke-dashoffset: 132;
+}
+
+.five .circle_animation {
+    -webkit-animation: five 1s ease-out forwards;
+    animation: five 1s ease-out forwards;
+}
+
+.four-of-five .circle_animation {
+    -webkit-animation: four-of-five 1s ease-out forwards;
+    animation: four-of-five 1s ease-out forwards;
+}
+
+.three-of-five .circle_animation {
+    -webkit-animation: three-of-five 1s ease-out forwards;
+    animation: three-of-five 1s ease-out forwards;
+}
+
+.two-of-five .circle_animation {
+    -webkit-animation: two-of-five 1s ease-out forwards;
+    animation: two-of-five 1s ease-out forwards;
+}
+
+.one-of-five .circle_animation {
+    -webkit-animation: one-of-five 1s ease-out forwards;
+    animation: one-of-five 1s ease-out forwards;
+}
+
+@-webkit-keyframes five {
+    to {
+        stroke-dashoffset: 0; /* 50% would be 220 (half the initial value specified above) */
+    }
+}
+
+@keyframes five {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@-webkit-keyframes four-of-five {
+    to {
+        stroke-dashoffset: 26; /* 50% would be 220 (half the initial value specified above) */
+    }
+}
+
+@keyframes four-of-five {
+    to {
+        stroke-dashoffset: 26;
+    }
+}
+
+@-webkit-keyframes three-of-five {
+    to {
+        stroke-dashoffset: 52; /* 50% would be 220 (half the initial value specified above) */
+    }
+}
+
+@keyframes three-of-five {
+    to {
+        stroke-dashoffset: 52;
+    }
+}
+
+@-webkit-keyframes two-of-five {
+    to {
+        stroke-dashoffset: 78; /* 50% would be 220 (half the initial value specified above) */
+    }
+}
+
+@keyframes two-of-five {
+    to {
+        stroke-dashoffset: 78;
+    }
+}
+
+@-webkit-keyframes one-of-five {
+    to {
+        stroke-dashoffset: 104; /* 50% would be 220 (half the initial value specified above) */
+    }
+}
+
+@keyframes one-of-five {
+    to {
+        stroke-dashoffset: 104;
+    }
+}

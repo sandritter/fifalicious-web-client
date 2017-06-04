@@ -14,11 +14,45 @@ class PlayerRepositoryImpl implements PlayerRepository{
                         avatar: '',
                         lastName: 'Sandritter',
                         firstName: 'Michael',
-                        nickName: 'msand001',
+                        nickName: 'Michael S.',
+                        strokes: [
+                                new Stroke(createDate: new Date(), isActive: true)
+                        ]
+                ),
+                new Player(
+                        avatar: '',
+                        lastName: 'Sandritter',
+                        firstName: 'Michael',
+                        nickName: 'Lukas H.',
+                        strokes: [
+                                new Stroke(createDate: new Date(), isActive: true),
+                                new Stroke(createDate: new Date(), isActive: true)
+                        ]
+                ),
+                new Player(
+                        avatar: '',
+                        lastName: 'Sandritter',
+                        firstName: 'Michael',
+                        nickName: 'Jan J.',
+                        strokes: [
+                                new Stroke(createDate: new Date(), isActive: true),
+                                new Stroke(createDate: new Date(), isActive: true),
+                                new Stroke(createDate: new Date(), isActive: true),
+                                new Stroke(createDate: new Date(), isActive: true),
+                                new Stroke(createDate: new Date(), isActive: true)
+                        ]
+                ),
+                new Player(
+                        avatar: '',
+                        lastName: 'Sandritter',
+                        firstName: 'Michael',
+                        nickName: 'Moritz M.',
                         strokes: [
                                 new Stroke(createDate: new Date(), isActive: true)
                         ]
                 )
-        ]
+        ].sort {
+            it.strokes.size()
+        }.reverse()
     }
 }
