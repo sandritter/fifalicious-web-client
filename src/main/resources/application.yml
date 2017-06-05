@@ -1,0 +1,10 @@
+server:
+  port: 8099
+
+rest:
+  client:
+    baseUrl: http://173.212.204.116:8090
+
+timeout:
+  connection: 12000
+  read: 12000

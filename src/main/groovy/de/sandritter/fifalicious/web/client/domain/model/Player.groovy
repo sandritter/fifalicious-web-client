@@ -2,10 +2,9 @@ package de.sandritter.fifalicious.web.client.domain.model
 
 class Player {
     Long playerId
-    String avatar
     String lastName
     String firstName
-    String nickName
+    Date last_update
     List<Stroke> strokes
 
     int getActiveAmountOfStrokes() {
