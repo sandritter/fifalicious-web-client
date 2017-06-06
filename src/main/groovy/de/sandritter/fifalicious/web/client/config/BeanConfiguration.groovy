@@ -1,7 +1,9 @@
-package de.sandritter.fifalicious.web.client.domain.config
+package de.sandritter.fifalicious.web.client.config
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
+import de.sandritter.fifalicious.web.client.domain.assembler.PlayerAssembler
+import de.sandritter.fifalicious.web.client.domain.assembler.StrokeAssembler
 import de.sandritter.fifalicious.web.client.domain.repository.PlayerRepository
 import de.sandritter.fifalicious.web.client.domain.repository.fifaliciousserver.PlayerRepositoryImpl
 import org.springframework.beans.factory.annotation.Value
@@ -31,24 +33,20 @@ class BeanConfiguration {
     private static final String WILDCARD = '*'
 
     @Bean
-    PlayerRepository playerRepository() {
-        new PlayerRepositoryImpl()
+    PlayerRepository playerRepository(@Value('${rest.client.baseUrl}') String baseUrl,
+                                      @Value('${timeout.connection}') int connectionTimeout,
+                                      @Value('${timeout.read}') int readTimeout) {
+        new PlayerRepositoryImpl(
+                getRestTemplate(baseUrl, connectionTimeout, readTimeout),
+                new PlayerAssembler(new StrokeAssembler())
+        )
     }
 
     @Bean
     RestTemplate restTemplate(@Value('${rest.client.baseUrl}') String baseUrl,
                               @Value('${timeout.connection}') int connectionTimeout,
                               @Value('${timeout.read}') int readTimeout) {
-        List<HttpMessageConverter<?>> messageConverters = [] + getDefaultMessageConverters(MEDIA_TYPES)
-        messageConverters << halConverterForJson
-
-        RestTemplate restTemplate = new RestTemplateBuilder()
-                .rootUri(baseUrl)
-                .setConnectTimeout(connectionTimeout)
-                .setReadTimeout(readTimeout)
-                .build()
-        restTemplate.messageConverters = messageConverters
-        restTemplate
+        getRestTemplate(baseUrl, connectionTimeout, readTimeout)
     }
 
     @Bean
@@ -77,5 +75,18 @@ class BeanConfiguration {
         converter.objectMapper = mapper
         converter.supportedMediaTypes = MEDIA_TYPES
         converter
+    }
+
+    private static RestTemplate getRestTemplate(String baseUrl, int connectionTimeout, int readTimeout) {
+        List<HttpMessageConverter<?>> messageConverters = [] + getDefaultMessageConverters(MEDIA_TYPES)
+        messageConverters << halConverterForJson
+
+        RestTemplate restTemplate = new RestTemplateBuilder()
+                .rootUri(baseUrl)
+                .setConnectTimeout(connectionTimeout)
+                .setReadTimeout(readTimeout)
+                .build()
+        restTemplate.messageConverters = messageConverters
+        restTemplate
     }
 }

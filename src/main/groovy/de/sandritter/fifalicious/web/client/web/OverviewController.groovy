@@ -1,4 +1,4 @@
-package de.sandritter.fifalicious.web.client.domain.web
+package de.sandritter.fifalicious.web.client.web
 
 import de.sandritter.fifalicious.web.client.domain.repository.PlayerRepository
 import groovy.transform.CompileStatic
@@ -22,7 +22,7 @@ class OverviewController {
 
     @GetMapping('/overview')
     String showOverview(Model model) {
-        model.addAttribute('players', playerRepository.players)
+        model.addAttribute('players', playerRepository.getPlayers())
         'overview'
     }
 }

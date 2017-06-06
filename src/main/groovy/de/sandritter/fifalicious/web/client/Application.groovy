@@ -1,4 +1,4 @@
-package de.sandritter.fifalicious.web.client.domain
+package de.sandritter.fifalicious.web.client
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication

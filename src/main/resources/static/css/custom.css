@@ -64,24 +64,29 @@ svg {
     animation: five 1s ease-out forwards;
 }
 
-.four-of-five .circle_animation {
-    -webkit-animation: four-of-five 1s ease-out forwards;
-    animation: four-of-five 1s ease-out forwards;
+.four .circle_animation {
+    -webkit-animation: four 1s ease-out forwards;
+    animation: four 1s ease-out forwards;
 }
 
-.three-of-five .circle_animation {
-    -webkit-animation: three-of-five 1s ease-out forwards;
-    animation: three-of-five 1s ease-out forwards;
+.three .circle_animation {
+    -webkit-animation: three 1s ease-out forwards;
+    animation: three 1s ease-out forwards;
 }
 
-.two-of-five .circle_animation {
-    -webkit-animation: two-of-five 1s ease-out forwards;
-    animation: two-of-five 1s ease-out forwards;
+.two .circle_animation {
+    -webkit-animation: two 1s ease-out forwards;
+    animation: two 1s ease-out forwards;
 }
 
-.one-of-five .circle_animation {
-    -webkit-animation: one-of-five 1s ease-out forwards;
-    animation: one-of-five 1s ease-out forwards;
+.one .circle_animation {
+    -webkit-animation: one 1s ease-out forwards;
+    animation: one 1s ease-out forwards;
+}
+
+.zero .circle_animation {
+    -webkit-animation: zero 1s ease-out forwards;
+    animation: zero 1s ease-out forwards;
 }
 
 @-webkit-keyframes five {
@@ -96,50 +101,62 @@ svg {
     }
 }
 
-@-webkit-keyframes four-of-five {
+@-webkit-keyframes four{
     to {
         stroke-dashoffset: 26; /* 50% would be 220 (half the initial value specified above) */
     }
 }
 
-@keyframes four-of-five {
+@keyframes four{
     to {
         stroke-dashoffset: 26;
     }
 }
 
-@-webkit-keyframes three-of-five {
+@-webkit-keyframes three{
     to {
         stroke-dashoffset: 52; /* 50% would be 220 (half the initial value specified above) */
     }
 }
 
-@keyframes three-of-five {
+@keyframes three{
     to {
         stroke-dashoffset: 52;
     }
 }
 
-@-webkit-keyframes two-of-five {
+@-webkit-keyframes two{
     to {
         stroke-dashoffset: 78; /* 50% would be 220 (half the initial value specified above) */
     }
 }
 
-@keyframes two-of-five {
+@keyframes two{
     to {
         stroke-dashoffset: 78;
     }
 }
 
-@-webkit-keyframes one-of-five {
+@-webkit-keyframes one{
     to {
         stroke-dashoffset: 104; /* 50% would be 220 (half the initial value specified above) */
     }
 }
 
-@keyframes one-of-five {
+@keyframes one{
     to {
         stroke-dashoffset: 104;
+    }
+}
+
+@-webkit-keyframes zero{
+    to {
+        stroke-dashoffset: 132; /* 50% would be 220 (half the initial value specified above) */
+    }
+}
+
+@keyframes zero{
+    to {
+        stroke-dashoffset: 132;
     }
 }

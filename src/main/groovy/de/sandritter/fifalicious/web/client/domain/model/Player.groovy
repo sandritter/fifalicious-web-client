@@ -9,33 +9,35 @@ class Player {
 
     int getActiveAmountOfStrokes() {
         strokes.findAll() {
-            it.isActive == true
+            it.isActive
         }.size()
     }
 
     String getStrikeRange() {
         int amountOfStrokes = getActiveAmountOfStrokes()
-        if (amountOfStrokes > 0) {
-            String strikeRange = ''
-            switch (amountOfStrokes) {
-                case 1:
-                    strikeRange = 'one-of-five'
-                    break;
-                case 2:
-                    strikeRange = 'two-of-five'
-                    break;
-                case 3:
-                    strikeRange = 'three-of-five'
-                    break;
-                case 4:
-                    strikeRange = 'four-of-five'
-                    break;
-                case 5:
-                    strikeRange = 'five'
-                    break;
-            }
-            return strikeRange
+        String strikeRange = ''
+        switch (amountOfStrokes) {
+            case 0:
+                strikeRange = 'zero'
+                break
+            case 1:
+                strikeRange = 'one'
+                break
+            case 2:
+                strikeRange = 'two'
+                break
+            case 3:
+                strikeRange = 'three'
+                break
+            case 4:
+                strikeRange = 'four'
+                break
+            case 5:
+                strikeRange = 'five'
+                break
+            default:
+                strikeRange = 'five'
         }
-        return 'five'
+        return strikeRange
     }
 }

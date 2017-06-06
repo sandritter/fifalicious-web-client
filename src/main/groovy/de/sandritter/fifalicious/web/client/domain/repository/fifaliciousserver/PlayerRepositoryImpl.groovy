@@ -1,5 +1,6 @@
 package de.sandritter.fifalicious.web.client.domain.repository.fifaliciousserver
 
+import de.sandritter.fifalicious.web.client.domain.assembler.PlayerAssembler
 import de.sandritter.fifalicious.web.client.domain.model.Player
 import de.sandritter.fifalicious.web.client.domain.model.Stroke
 import de.sandritter.fifalicious.web.client.domain.repository.PlayerRepository
@@ -10,10 +11,17 @@ import org.springframework.http.HttpMethod
 import org.springframework.web.client.RestClientException
 import org.springframework.web.client.RestTemplate
 
-class PlayerRepositoryImpl implements PlayerRepository{
+class PlayerRepositoryImpl implements PlayerRepository {
+
+
+    private final RestTemplate restTemplate
+    private final PlayerAssembler playerAssembler
 
     @Autowired
-    private final RestTemplate restTemplate
+    PlayerRepositoryImpl(RestTemplate restTemplate, PlayerAssembler playerAssembler) {
+        this.restTemplate = restTemplate
+        this.playerAssembler = playerAssembler
+    }
 
     @Override
     List<Player> getPlayers() {
@@ -24,37 +32,33 @@ class PlayerRepositoryImpl implements PlayerRepository{
         } catch (RestClientException e) {
 
         }
+        List<Player> players = playerAssembler.getAssembledPlayers(playersResponse)
 
-        return playersResponse.content.toList().sort{
+        return players.sort {
             it.strokes.size()
         }.reverse()
+    }
 
-
+    public final List<Player> givenDummyPlayers() {
         return [
                 new Player(
-                        avatar: '',
                         lastName: 'Sandritter',
                         firstName: 'Michael',
-                        nickName: 'Michael S.',
                         strokes: [
                                 new Stroke(createDate: new Date(), isActive: true)
                         ]
                 ),
                 new Player(
-                        avatar: '',
                         lastName: 'Sandritter',
                         firstName: 'Michael',
-                        nickName: 'Lukas H.',
                         strokes: [
                                 new Stroke(createDate: new Date(), isActive: true),
                                 new Stroke(createDate: new Date(), isActive: true)
                         ]
                 ),
                 new Player(
-                        avatar: '',
                         lastName: 'Sandritter',
                         firstName: 'Michael',
-                        nickName: 'Jan J.',
                         strokes: [
                                 new Stroke(createDate: new Date(), isActive: true),
                                 new Stroke(createDate: new Date(), isActive: true),
@@ -64,10 +68,8 @@ class PlayerRepositoryImpl implements PlayerRepository{
                         ]
                 ),
                 new Player(
-                        avatar: '',
                         lastName: 'Sandritter',
                         firstName: 'Michael',
-                        nickName: 'Moritz M.',
                         strokes: [
                                 new Stroke(createDate: new Date(), isActive: true)
                         ]
