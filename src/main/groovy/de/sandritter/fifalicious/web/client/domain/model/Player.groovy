@@ -1,10 +1,10 @@
 package de.sandritter.fifalicious.web.client.domain.model
 
 class Player {
-    Long playerId
+    Long reference
     String lastName
     String firstName
-    Date last_update
+    Date lastUpdate
     List<Stroke> strokes
 
     int getActiveAmountOfStrokes() {
@@ -15,7 +15,7 @@ class Player {
 
     String getStrikeRange() {
         int amountOfStrokes = getActiveAmountOfStrokes()
-        String strikeRange = ''
+        String strikeRange
         switch (amountOfStrokes) {
             case 0:
                 strikeRange = 'zero'
@@ -39,5 +39,9 @@ class Player {
                 strikeRange = 'five'
         }
         return strikeRange
+    }
+
+    String getCombinedShortName() {
+        firstName + ' ' + lastName.subSequence(0, 1) + '.'
     }
 }

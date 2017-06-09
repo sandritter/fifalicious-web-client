@@ -25,6 +25,7 @@ class PlayerRepositoryImpl implements PlayerRepository {
 
     @Override
     List<Player> getPlayers() {
+        return givenDummyPlayers()
         Resources<Player> playersResponse = null
         try {
             playersResponse = (Resources<Player>) restTemplate.exchange('/players',
@@ -33,22 +34,23 @@ class PlayerRepositoryImpl implements PlayerRepository {
 
         }
         List<Player> players = playerAssembler.getAssembledPlayers(playersResponse)
-
         return players.sort {
             it.strokes.size()
         }.reverse()
     }
 
-    public final List<Player> givenDummyPlayers() {
+    private static final List<Player> givenDummyPlayers() {
         return [
                 new Player(
-                        lastName: 'Sandritter',
-                        firstName: 'Michael',
+                        reference: 1,
+                        lastName: 'Hueck',
+                        firstName: 'Lukas',
                         strokes: [
                                 new Stroke(createDate: new Date(), isActive: true)
                         ]
                 ),
                 new Player(
+                        reference: 2,
                         lastName: 'Sandritter',
                         firstName: 'Michael',
                         strokes: [
@@ -57,8 +59,9 @@ class PlayerRepositoryImpl implements PlayerRepository {
                         ]
                 ),
                 new Player(
-                        lastName: 'Sandritter',
-                        firstName: 'Michael',
+                        reference: 3,
+                        lastName: 'Hert',
+                        firstName: 'Alex',
                         strokes: [
                                 new Stroke(createDate: new Date(), isActive: true),
                                 new Stroke(createDate: new Date(), isActive: true),
@@ -68,9 +71,13 @@ class PlayerRepositoryImpl implements PlayerRepository {
                         ]
                 ),
                 new Player(
-                        lastName: 'Sandritter',
-                        firstName: 'Michael',
+                        reference: 4,
+                        lastName: 'Jensen',
+                        firstName: 'Sven',
                         strokes: [
+                                new Stroke(createDate: new Date(), isActive: true),
+                                new Stroke(createDate: new Date(), isActive: true),
+                                new Stroke(createDate: new Date(), isActive: true),
                                 new Stroke(createDate: new Date(), isActive: true)
                         ]
                 )

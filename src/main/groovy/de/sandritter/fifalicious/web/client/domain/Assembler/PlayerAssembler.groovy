@@ -13,14 +13,14 @@ class PlayerAssembler {
         this.strokeAssembler = strokeAssembler
     }
 
-    List<Player> getAssembledPlayers(Resources<Player> playerResources) {
+    static List<Player> getAssembledPlayers(Resources<Player> playerResources) {
         List<Player> players = []
-        playerResources.content.each {
+        playerResources?.content?.each {
             Player player = new Player(
-                    playerId: it.playerId,
+                    reference: it.reference,
                     firstName: it.firstName,
                     lastName: it.lastName,
-                    last_update: it.last_update,
+                    lastUpdate: it.lastUpdate,
                     strokes: it.strokes
             )
             players.add(player)
