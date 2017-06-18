@@ -5,6 +5,7 @@ import de.sandritter.fifalicious.web.client.domain.repository.PlayerRepository
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 class OverviewController {
 
     private final PlayerRepository playerRepository
+    @Value('${gameConfig.amountStrokesToShitYourself}')
+    private int maxAmountOfStrokes;
 
     @Autowired
     OverviewController(PlayerRepository playerRepository) {
@@ -27,6 +30,7 @@ class OverviewController {
     String showOverview(Model model) {
         List<Player> players = playerRepository.getPlayers()
         model.addAttribute('players', players)
+        model.addAttribute('shitAmount', maxAmountOfStrokes)
         'overview'
     }
 }

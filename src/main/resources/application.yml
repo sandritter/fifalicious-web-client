@@ -8,3 +8,6 @@ rest:
 timeout:
   connection: 12000
   read: 12000
+
+gameConfig:
+  amountStrokesToShitYourself: 5

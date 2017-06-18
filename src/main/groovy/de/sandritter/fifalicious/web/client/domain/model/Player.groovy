@@ -44,4 +44,32 @@ class Player {
     String getCombinedShortName() {
         firstName + ' ' + lastName.subSequence(0, 1) + '.'
     }
+
+    String getColorCode() {
+        int amountStrokes = getActiveAmountOfStrokes()
+        String colorCode
+        switch (amountStrokes) {
+            case 0:
+                colorCode = '#6fdb6f'
+                break
+            case 1:
+                colorCode = '#6fdb6f'
+                break
+            case 2:
+                colorCode = '#6fdb6f'
+                break
+            case 3:
+                colorCode = '#F7E211'
+                break
+            case 4:
+                colorCode = '#F7E211'
+                break
+            case 5:
+                colorCode = '#562F19'
+                break
+            default:
+                colorCode = '#562F19'
+        }
+        return colorCode
+    }
 }

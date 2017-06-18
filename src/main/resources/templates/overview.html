@@ -3,10 +3,12 @@
 <head>
     <title>Fifalicious Stroke Ranking</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic' rel='stylesheet' type='text/css'/>
-    <link rel="stylesheet" type="text/css" media="all" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic'
+          rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"/>
     <link rel="stylesheet" type="text/css" media="all" href="../static/css/custom.css" th:href="@{/css/custom.css}"/>
-    <script type="text/javascript" src="../static/js/bootstrap.min.js" th:href="@{/js/bootstrap.min.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body class="body-background-color">
 <div class="container-fluid">
@@ -21,61 +23,48 @@
         <div class="col-lg-3 col-md-3"></div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div th:if="${players != null}">
-                <div class="jumbotron">
-                    <div class="container-fluid">
-                        <div th:each="player: ${players}" class="row row-bordered top-bottom-buffer">
-                            <div class="col-md-2 col-sm-2 col-xs-2">
-                                <img th:src="@{/images/} + ${player.reference} + ${'.png'}" class="img-circle" alt="Responsive image"/>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-3">
-                                <div  class="vertical-align-middle-with-height-50" th:text="${player.getCombinedShortName()}">
-                                    Nickname
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="container-fluid">
+                            <div th:each="player: ${players}" class="row row-bordered top-bottom-buffer player"
+                                 th:id="${player.reference}">
+                                <div class="col-md-2 col-sm-2 col-xs-3">
+                                    <img th:src="@{/images/} + ${player.reference} + ${'.png'}" class="img-circle"
+                                         alt="Responsive image"/>
                                 </div>
-                            </div>
-                            <div class="col-md-2 col-sm-2 col-xs-2">
-                                <img th:if="${player.getActiveAmountOfStrokes() &gt; 4}" th:src="@{/images/shit.png}" alt="Responsive image"/>
-                            </div>
-                            <div class="col-md-2 col-sm-2 col-xs-2">
-                                <div th:if="${player.getActiveAmountOfStrokes() &lt; 3}">
+                                <div class="col-md-3 col-sm-3 col-xs-0">
+                                    <div class="vertical-align-middle-with-height-50 player-name"
+                                         th:text="${player.getCombinedShortName()}">
+                                        Nickname
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-xs-0">
+                                    <img th:if="${player.getActiveAmountOfStrokes() &gt; 4}"
+                                         th:src="@{/images/shit.png}" alt="Responsive image"/>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-xs-3">
                                     <div class="item" th:classappend="${player.getStrikeRange()}">
-                                        <span class="circle-text" th:text="${player.getActiveAmountOfStrokes()}+'/5'">1/5</span>
+                                            <span class="circle-text"
+                                                  th:text="${player.getActiveAmountOfStrokes()}+'/'+${shitAmount}">1/5</span>
                                         <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
                                             <g>
-                                                <circle id="circle" class="circle_animation" r="21" cy="25" cx="25" stroke-width="8" stroke="#6fdb6f" fill="none"/>
+                                                <circle id="circle" class="circle_animation" r="21" cy="25" cx="25"
+                                                        stroke-width="8" th:attr="stroke=${player.getColorCode()}"
+                                                        fill="none"/>
                                             </g>
                                         </svg>
                                     </div>
                                 </div>
-                                <div th:if="${player.getActiveAmountOfStrokes() &gt; 2 and player.getActiveAmountOfStrokes() &lt; 5}">
-                                    <div class="item" th:classappend="${player.getStrikeRange()}">
-                                        <span class="circle-text" th:text="${player.getActiveAmountOfStrokes()}+'/5'">1/5</span>
-                                        <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
-                                            <g>
-                                                <circle id="circle" class="circle_animation" r="21" cy="25" cx="25" stroke-width="8" stroke="#F7E211" fill="none"/>
-                                            </g>
-                                        </svg>
-                                    </div>
+                                <div class="col-md-1 col-sm-1 col-xs-3">
+                                    <button type="button" class="btn btn-default btn-lg addStroke">
+                                        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                                    </button>
                                 </div>
-                                <div th:if="${player.getActiveAmountOfStrokes() &gt; 4}">
-                                    <div class="item" th:classappend="${player.getStrikeRange()}">
-                                        <span class="circle-text" th:text="${player.getActiveAmountOfStrokes()}+'/5'">1/5</span>
-                                        <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
-                                            <g>
-                                                <circle id="circle" class="circle_animation" r="21" cy="25" cx="25" stroke-width="8" stroke="#562F19" fill="none"/>
-                                            </g>
-                                        </svg>
-                                    </div>
+                                <div class="col-md-1 col-sm-1 col-xs-3">
+                                    <button type="button" class="btn btn-default btn-lg deleteStrokes">
+                                        <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="col-md-2 col-sm-2 col-xs-2">
-                                <button type="button" class="btn btn-default btn-lg">
-                                    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-                                </button>
-                            </div>
-                            <div class="col-md-1 col-sm-1 col-xs-1">
-                                <button type="button" class="btn btn-default btn-lg">
-                                    <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -85,5 +74,8 @@
         <div class="col-lg-3 col-md-3"></div>
     </div>
 </div>
+<script language="JavaScript" type="text/javascript" src="../static/js/main.js" th:src="@{js/main.js}"></script>
+<script language="JavaScript" type="text/javascript" src="../static/js/bootstrap.min.js"
+        th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 </html>
